@@ -1,19 +1,62 @@
 import React from "react";
-import Sidebar from "./components/Sidebar";
-import MidArea from "./components/MidArea";
-import PreviewArea from "./components/PreviewArea";
+import { EventBody } from './components/eventBody'
+import { useState } from 'react';
+import { NavBar } from './components/navBar';
+import { DragDropContext} from "react-beautiful-dnd";
+import { MOVES } from "./constants";
 
 export default function App() {
+  const [moves, setMoves] = useState(MOVES);
+  const [actions, setActions]= useState([]);
+  const [actions2, setActions2]= useState([]);
+  
+  const onHandleDragEnd = (result) =>{
+    const {source, destination} = result;
+    console.log(source, destination)
+    if (!destination) {
+      return;
+    }
+
+    if (
+      destination.droppableId === source.droppableId &&
+      destination.index === source.index
+    ) {
+      return;
+    }
+    let add , 
+      active = moves,
+      complete = actions,
+      complete2 = actions2; 
+
+    // take a move to drag and drop 
+    add = active[source.index];
+
+    // Destination Logic
+    if (destination.droppableId === "MovesActions") {
+      // add the move to action 1
+      complete.push(add);
+    } else {
+      //add the move to action 2
+      complete2.push(add);
+    }
+    setActions2(complete2);
+    setActions(complete);
+    setMoves(active);
+  }
+  
   return (
-    <div className="bg-blue-100 pt-6 font-sans">
-      <div className="h-screen overflow-hidden flex flex-row  ">
-        <div className="flex-1 h-screen overflow-hidden flex flex-row bg-white border-t border-r border-gray-200 rounded-tr-xl mr-2">
-          <Sidebar /> <MidArea />
-        </div>
-        <div className="w-1/3 h-screen overflow-hidden flex flex-row bg-white border-t border-l border-gray-200 rounded-tl-xl ml-2">
-          <PreviewArea />
-        </div>
-      </div>
+    <div className="bg-blue-100 font-sans text-center">
+      <NavBar/>
+        <DragDropContext onDragEnd={onHandleDragEnd}>
+          <EventBody 
+            moves={moves} 
+            setMoves={setMoves} 
+            actions={actions}
+            actions2={actions2}
+            setActions2={setActions2}
+            setActions={setActions}  
+          />
+        </DragDropContext>
     </div>
   );
 }
