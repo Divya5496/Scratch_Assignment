@@ -4,8 +4,8 @@ import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
-import Logo from '../Assets/images/Logo.png';
-import { PAGES } from '../constants';
+import Logo from '../assets/images/Logo.png';
+import { PAGES } from '../constant';
 
 export const NavBar = () => {
   const [anchorElNav, setAnchorElNav] = React.useState(null);
@@ -25,7 +25,7 @@ export const NavBar = () => {
                 display: { xs: 'none', md: 'flex' },
               }}
           >
-            <img src={Logo} style={{ height: '50px', display: 'flex'}} />
+            <img src={Logo} alt='none' style={{ height: '50px', display: 'flex'}} />
           </Box>  
           <Box
              sx={{
@@ -34,7 +34,7 @@ export const NavBar = () => {
                 display: { xs: 'flex', md: 'none' },
               }}
           >
-            <img src={Logo} style={{ height: '50px', display: 'flex'}} />
+            <img src={Logo} alt ='none 'style={{ height: '50px', display: 'flex'}} />
           </Box>  
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {PAGES.map((page) => (

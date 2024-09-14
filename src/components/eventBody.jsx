@@ -14,7 +14,7 @@ import Draggable1 from 'react-draggable';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import WallpaperIcon from '@mui/icons-material/Wallpaper';
-import { WARN_MSG_POS, WARN_MSG_SIZE } from '../constants';
+import { WARN_MSG_POS, WARN_MSG_SIZE } from '../constant';
 
 export const EventBody = (props) => {
     const {
@@ -43,7 +43,7 @@ export const EventBody = (props) => {
     const [hello2, setHello2] = React.useState(false);
     const [theme, setTheme] = React.useState(false);
     const [displayAddIcon, setDisplayAddIcon] = React.useState(true);
-    const [sprite, setSprite]= React.useState(require('../Assets/images/cat.png'));
+    const [sprite, setSprite]= React.useState(require('../assets/images/cat.png'));
     const [sprite2, setSprite2]= React.useState(null);
 
     console.log("rendering...");
@@ -142,10 +142,10 @@ export const EventBody = (props) => {
             tempT = tempT !== (-parseInt(yInput)) && parseInt(yInput) !== 0 
                 ? (random ? Math.floor((Math.random() * (-140-140)) + 140) : -parseInt(yInput)) 
                 : tempT;
-            if(parseInt(yInput)==0){
+            if(parseInt(yInput)===0){
                 tempT = 0;
             }
-            if (parseInt(xInput)==0){
+            if (parseInt(xInput)===0){
                 tempR = 0;
             }
             //return to intial if it is out of bounds 
@@ -299,7 +299,7 @@ export const EventBody = (props) => {
     };
 
     function clearTimeouts(){
-        var highestTimeoutId = setTimeout(";");
+        var highestTimeoutId = setTimeout();
         for (var i = 0 ; i < highestTimeoutId ; i++) {
             clearTimeout(i); 
         }
@@ -336,10 +336,10 @@ export const EventBody = (props) => {
     //function to start the actions
     //send true as a parameter if the actions are for the first sprite else false 
     function runAction1(){
-        actions && actions.map((item, i) => {startActions(item.todo, i, true); return});
+        actions && actions.map((item, i) => {startActions(item.todo, i, true); return false});
     }
     function runAction2(){
-        !displayAddIcon && actions2 && actions2.map((item, i) => {startActions(item.todo, i, false); return});
+        !displayAddIcon && actions2 && actions2.map((item, i) => {startActions(item.todo, i, false); return false});
     }
     
   return (
@@ -401,7 +401,7 @@ export const EventBody = (props) => {
         <div className="icon">
             <AddBoxIcon sx={{color:'gray', cursor:'pointer'}} onClick={()=>{
                 setDisplayAddIcon(!displayAddIcon);
-                setSprite2(require('../Assets/images/jerry1.png'));
+    
                 refresh();
             }}/>
             <span class="tooltiptext">add sprite</span>
@@ -465,7 +465,7 @@ export const EventBody = (props) => {
                         </div>
                         : null
                     }
-                    <img src={sprite} 
+                    <img src={sprite} alt ='none'
                         draggable='false'
                         style={{
                             cursor:"pointer",
@@ -486,7 +486,7 @@ export const EventBody = (props) => {
                         </div>
                         : null
                     }
-                    <img src={sprite2} 
+                    <img src={sprite2} alt='none' 
                         draggable='false'
                         style={{
                             cursor:"pointer",

@@ -1,9 +1,9 @@
 import React from "react";
-import { EventBody } from './Components/eventBody'
+import { EventBody } from './components/eventBody'
 import { useState } from 'react';
-import { NavBar } from './Components/navBar';
+import { NavBar } from './components/navBar';
 import { DragDropContext} from "react-beautiful-dnd";
-import { MOVES } from "./constants";
+import { MOVES } from "./constant";
 
 export default function App() {
   const [moves, setMoves] = useState(MOVES);

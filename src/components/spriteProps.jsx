@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import './styles.css';
 import { Box } from "@mui/material";
 
@@ -7,23 +7,9 @@ export const Sprites = (props) => {
   const spriteProps= [
       {
         id:0,
-        src:require('../Assets/images/cat.png')
+        src:require('../assets/images/cat.png')
       },
-      { 
-        id:1,
-        src: require('../Assets/images/jerry1.png')
-      },
-      { 
-        id:2,
-        src:require('../Assets/images/ball.png')
-      },
-      
-      {
-        id:3,
-        src:require('../Assets/images/Mickey_Mouse.png')
-      },
-
-  ];
+    ];
   function handleClick(src) {
     console.log('clicked')
     displayAddIcon ? setSprite(src): setSprite2(src);
@@ -55,7 +41,7 @@ export const Sprites = (props) => {
                 }}
                 onClick={()=>handleClick(item.src)}
             >
-                <img src={item.src} 
+                <img src={item.src} alt ='none'
                     style={{
                         matginBottom:'30px',
                         height:'120px',
