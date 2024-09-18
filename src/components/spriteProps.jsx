@@ -11,7 +11,7 @@ export const Sprites = (props) => {
       },
       { 
         id:1,
-        src:require('../assets/images/ball.jpg')
+        src:require('../assets/images/jerry1.png')
       },
     ];
   function handleClick(src) {

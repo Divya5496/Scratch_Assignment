@@ -299,7 +299,8 @@ export const EventBody = (props) => {
     };
 
     function clearTimeouts(){
-        var highestTimeoutId = setTimeout();
+        // eslint-disable-next-line no-implied-eval
+        var highestTimeoutId = setTimeout(";");
         for (var i = 0 ; i < highestTimeoutId ; i++) {
             clearTimeout(i); 
         }
@@ -401,7 +402,7 @@ export const EventBody = (props) => {
         <div className="icon">
             <AddBoxIcon sx={{color:'gray', cursor:'pointer'}} onClick={()=>{
                 setDisplayAddIcon(!displayAddIcon);
-    
+                setSprite2(require('../assets/images/jerry1.png'));
                 refresh();
             }}/>
             <span class="tooltiptext">add sprite</span>
@@ -465,7 +466,7 @@ export const EventBody = (props) => {
                         </div>
                         : null
                     }
-                    <img src={sprite} alt ='none'
+                    <img src={sprite} alt='sprite'
                         draggable='false'
                         style={{
                             cursor:"pointer",
@@ -486,7 +487,7 @@ export const EventBody = (props) => {
                         </div>
                         : null
                     }
-                    <img src={sprite2} alt='none' 
+                    <img src={sprite2} alt='sprite2'
                         draggable='false'
                         style={{
                             cursor:"pointer",

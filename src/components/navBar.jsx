@@ -25,7 +25,7 @@ export const NavBar = () => {
                 display: { xs: 'none', md: 'flex' },
               }}
           >
-            <img src={Logo} alt='none' style={{ height: '50px', display: 'flex'}} />
+            <img src={Logo} style={{ height: '50px', display: 'flex'}} alt ='logo'/>
           </Box>  
           <Box
              sx={{
@@ -34,7 +34,7 @@ export const NavBar = () => {
                 display: { xs: 'flex', md: 'none' },
               }}
           >
-            <img src={Logo} alt ='none 'style={{ height: '50px', display: 'flex'}} />
+            <img src={Logo} style={{ height: '50px', display: 'flex'}} alt='logo' />
           </Box>  
           <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
             {PAGES.map((page) => (
