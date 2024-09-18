@@ -9,6 +9,10 @@ export const Sprites = (props) => {
         id:0,
         src:require('../assets/images/cat.png')
       },
+      { 
+        id:1,
+        src:require('../assets/images/ball.jpg')
+      },
     ];
   function handleClick(src) {
     console.log('clicked')
