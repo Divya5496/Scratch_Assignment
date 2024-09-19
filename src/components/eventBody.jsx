@@ -48,6 +48,76 @@ export const EventBody = (props) => {
 
     console.log("rendering...");
 
+    const checkCollision = () => {
+
+        if (!ref.current || !ref2.current) return false;
+
+        const rect1 = ref.current?.getBoundingClientRect();
+         const rect2 = ref2.current?.getBoundingClientRect();
+        return !(
+            rect1.top + rect1.height < rect2.top ||
+            rect1.top > rect2.top + rect2.height ||
+            rect1.left + rect1.width < rect2.left ||
+            rect1.left > rect2.left + rect2.width
+        );
+    };
+
+    const swapAnimations = () => {
+        // Swap animations
+        const tempR = r;
+        const tempT = t;
+        r = r2;
+        t = t2;
+        r2 = tempR;
+        t2 = tempT;
+
+        // Apply swapped transforms
+        ref.current.style.transform = `scale(${scale})translate(${r}, ${t}) rotate(${angle}deg)`;
+        ref2.current.style.transform = `scale(${scale2})translate(${r2}, ${t2}) rotate(${angle2}deg)`;
+    };
+
+    React.useEffect(() => {
+        const interval = setInterval(() => {
+            if (checkCollision()) {
+                swapAnimations();
+            }
+        }, 100); // Check collision every 100ms
+
+        return () => clearInterval(interval);
+    }, [r, t, r2, t2]);
+
+    // Other functions (transform, moveUp, moveDown, etc.) remain unchanged
+    // ... (include the existing logic for moveUp, moveDown, etc.)
+
+    const refresh = (msg) => {
+        //refresh to intial positions
+        r = '0%';
+        t = '0%';
+        r2 = '0%';
+        t2 = '0%';
+        scale2 = 1;
+        angle2 = 0;
+        scale = 1;
+        angle = 0;
+        clearTimeouts();
+        setHello(false);
+
+        //warn message about the boundaries
+        if (msg) {
+            toast.warn(msg, {
+                position: "top-center",
+                autoClose: 2000,
+                borderRadius: '20px',
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+            });
+        }
+        ref.current.style.transform = `scale(${scale}) translate(${r}, ${t}) rotate(${angle})`;
+        ref2.current.style.transform = `scale(${scale2}) translate(${r2}, ${t2}) rotate(${angle2})`;
+    };
+
+
     function transform(temp, xAxis, action1){
         let value = temp.toString();
         if(xAxis){
@@ -305,35 +375,6 @@ export const EventBody = (props) => {
             clearTimeout(i); 
         }
     }
-
-    const refresh = (msg) => {
-        //refresh to intial positions 
-        r = '0%';
-        t = '0%';
-        r2 = '0%';
-        t2= '0%';
-        scale2=1;
-        angle2=0;
-        scale=1;
-        angle=0;
-        clearTimeouts();
-        setHello(false);
-
-        //warn message about the boundaries 
-        if(msg){
-            toast.warn(msg,{
-                position: "top-center",
-                autoClose: 2000,
-                borderRadius:'20px',
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-            });
-        }
-        ref.current.style.transform = `scale(${scale}) translate(${r}, ${t}) rotate(${angle})`;
-        ref2.current.style.transform = `scale(${scale2}) translate(${r2}, ${t2}) rotate(${angle2})`;
-    };
-
     //function to start the actions
     //send true as a parameter if the actions are for the first sprite else false 
     function runAction1(){
